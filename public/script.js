@@ -7,35 +7,55 @@ var shoppingApp = function() {
   var cart = [];
 
   var updateCart = function() {
-    //Write this function. In this function we render the page.
-    // Meaning we make sure that all our cart items are displayed in the browser.
-    // Remember to empty the "cart div" before you re-add all the item elements.
     shoppingList.empty();
     var output = '';
     var totalPrice = 0;
+    var button =
+      '<button type="button" class="btn btn-danger btn-xs remove">Remove</button>';
+
     for (var i = 0; i < cart.length; i += 1) {
-      output += '<p>' + cart[i].name + ' - $' + cart[i].price + '</p>';
-      totalPrice += cart[i].price;
+      if (cart[i].amount === 1) {
+        output += '<p class="cart-item">' + cart[i].name +
+          ' - $' + cart[i].price + ' ' + button + '</p>';
+        totalPrice += cart[i].price;
+      } else {
+        output += '<p class="cart-item">' + cart[i].name +
+          ' (' + cart[i].amount + ') - $' + cart[i].price +        ' ' + button + '</p>';
+        totalPrice += cart[i].price * cart[i].amount;
+      }
     }
     shoppingList.append(output);
     shoppingCart.find('.total').text(totalPrice);
   };
 
   var addItem = function(item) {
-    //Write this function. Remember this function has nothing to do with display.
-    // It simply is for adding an item to the cart array, no HTML involved - honest ;-)
+    for (var i = 0; i < cart.length; i += 1) {
+      if (item.name === cart[i].name) {
+        cart[i].amount++;
+        return;
+      }
+    }
     cart.push(item);
   };
 
   var clearCart = function() {
-    //Write a function that clears the cart ;-)
     cart = [];
     shoppingList.empty();
   };
+
+  var removeItem = function(itemIndex) {
+    for (var i = 0; i < cart.length; i += 1) {
+      if (i === itemIndex) {
+        cart.splice(i, 1);
+      }
+    }
+  };
+
   return {
     updateCart: updateCart,
     addItem: addItem,
-    clearCart: clearCart
+    clearCart: clearCart,
+    removeItem: removeItem
   };
 };
 
@@ -56,6 +76,7 @@ $('.add-to-cart').on('click', function() {
   var item = {};
   item.name = itemHTML.data().name;
   item.price = itemHTML.data().price;
+  item.amount = 1;
 
   app.addItem(item);
   app.updateCart();
@@ -64,5 +85,13 @@ $('.add-to-cart').on('click', function() {
 $('.clear-cart').on('click', function() {
   app.clearCart();
   shoppingCart.find('.total').text('0');
+  app.updateCart();
+});
+
+$('.shopping-cart').on('click','.remove', function() {
+  var item = $(this).closest('.cart-item');
+  // remove item from cart
+  app.removeItem(item.index());
+  //update shopping cart on page
   app.updateCart();
 });
