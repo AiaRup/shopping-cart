@@ -31,6 +31,8 @@ var shoppingApp = function() {
     //Write a function that clears the cart ;-)
     cart = [];
     shoppingList.empty();
+    shoppingCart.find('.total').text('0');
+
   };
   return {
     updateCart: updateCart,
@@ -63,6 +65,11 @@ $('.add-to-cart').on('click', function() {
 
 $('.clear-cart').on('click', function() {
   app.clearCart();
-  shoppingCart.find('.total').text('0');
-  app.updateCart();
+});
+
+// when the web page is max-width 740px
+$('.navbar-toggle.collapsed').on('click', function () {
+  $('.view-cart').css('display', 'none');
+  $('.nav.navbar-nav.navbar-right').css('display', 'none');
+  $('.shopping-cart').toggleClass('show');
 });
