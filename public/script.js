@@ -41,6 +41,7 @@ var shoppingApp = function() {
   var clearCart = function() {
     cart = [];
     shoppingList.empty();
+    shoppingCart.find('.total').text('0');
   };
 
   var removeItem = function(itemIndex) {
@@ -84,8 +85,6 @@ $('.add-to-cart').on('click', function() {
 
 $('.clear-cart').on('click', function() {
   app.clearCart();
-  shoppingCart.find('.total').text('0');
-  app.updateCart();
 });
 
 $('.shopping-cart').on('click','.remove', function() {
@@ -94,4 +93,11 @@ $('.shopping-cart').on('click','.remove', function() {
   app.removeItem(item.index());
   //update shopping cart on page
   app.updateCart();
+});
+
+// when the web page is max-width 740px
+$('.navbar-toggle.collapsed').on('click', function () {
+  $('.view-cart').css('display', 'none');
+  $('.nav.navbar-nav.navbar-right').css('display', 'none');
+  $('.shopping-cart').toggleClass('show');
 });

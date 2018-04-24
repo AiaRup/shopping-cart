@@ -107,13 +107,8 @@ body {
 }
 
 .remove {
-  /* margin: 0 5px;
-  position: relative;
-  right: 0;
-  display: inline-block; */
   margin-left: auto;
 }
-
 
 .cart-item {
   display: flex;
