@@ -25,7 +25,7 @@ var shoppingApp = function() {
       }
     }
     shoppingList.append(output);
-    shoppingCart.find('.total').text(totalPrice);
+    $('.total').text(totalPrice);
   };
 
   var addItem = function(item) {
@@ -41,15 +41,16 @@ var shoppingApp = function() {
   var clearCart = function() {
     cart = [];
     shoppingList.empty();
-    shoppingCart.find('.total').text('0');
+    $('.total').text('0');
   };
 
   var removeItem = function(itemIndex) {
     for (var i = 0; i < cart.length; i += 1) {
       if (i === itemIndex) {
-        cart.splice(i, 1);
+        cart[i].amount === 1 ? cart.splice(i, 1) : cart[i].amount--;
       }
     }
+    updateCart();
   };
 
   return {
@@ -95,7 +96,7 @@ $('.shopping-cart').on('click','.remove', function() {
   app.updateCart();
 });
 
-// when the web page is max-width 740px
+// When burger-menu is clicked
 $('.navbar-toggle.collapsed').on('click', function () {
   $('.view-cart').css('display', 'none');
   $('.nav.navbar-nav.navbar-right').css('display', 'none');
