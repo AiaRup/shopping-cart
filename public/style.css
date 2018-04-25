@@ -113,3 +113,14 @@ body {
 .cart-item {
   display: flex;
 }
+
+/* MEDIA QUERIES*/
+
+@media screen and (max-width: 768px) {
+  .view-cart {
+    display: none;
+  }
+  .nav.navbar-nav.navbar-right {
+    display: none;
+  }
+}

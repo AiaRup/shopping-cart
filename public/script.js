@@ -98,7 +98,5 @@ $('.shopping-cart').on('click','.remove', function() {
 
 // When burger-menu is clicked
 $('.navbar-toggle.collapsed').on('click', function () {
-  $('.view-cart').css('display', 'none');
-  $('.nav.navbar-nav.navbar-right').css('display', 'none');
   $('.shopping-cart').toggleClass('show');
 });
