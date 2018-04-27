@@ -120,10 +120,3 @@ $('.shopping-cart').on('click', '.remove', function () {
   //update shopping cart on page
   app.updateCart();
 });
-
-// when the web page is max-width 740px
-$('.navbar-toggle.collapsed').on('click', function () {
-  $('.view-cart').css('display', 'none');
-  $('.nav.navbar-nav.navbar-right').css('display', 'none');
-  $('.shopping-cart').toggleClass('show');
-});
