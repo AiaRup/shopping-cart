@@ -91,7 +91,7 @@ app.updateCart();
 
 /******** EVENT LISTENERS **********/
 // When burger-menu/shopping cart is clicked
-$('.view-cart, navbar-toggle.collapsed, navbar-toggle').on('click', function () {
+$('.view-cart, .navbar-toggle.collapsed, .navbar-toggle').on('click', function () {
   //hide/show the shopping cart!
   shoppingCart.toggleClass('show');
 });
@@ -113,7 +113,7 @@ $('.clear-cart').on('click', function () {
   app.clearCart();
 });
 
-$('.shopping-cart').on('click', '.remove', function () {
+shoppingCart.on('click', '.remove', function () {
   var item = $(this).closest('.cart-item');
   // remove item from cart
   app.removeItem(item.index());
